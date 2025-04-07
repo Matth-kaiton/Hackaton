@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', sans-serif;
-    background: url('/planet.png') no-repeat center center fixed;
+    background: url('./planet.png') no-repeat center center fixed;
     background-size: cover;
     margin: 0;
     padding: 40px;
