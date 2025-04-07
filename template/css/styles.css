@@ -1,0 +1,125 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: url('/template/image/image.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  h1 {
+    color: #96bfba;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    max-width: 700px;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .question {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #004d40;
+  }
+  
+  .options button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: #80deea;
+    transition: background 0.3s;
+    text-align: left;
+  }
+  
+  .options button:hover {
+    background: #4dd0e1;
+  }
+  
+  .stats {
+    margin-top: 10px;
+    padding: 10px;
+    background: #e0f2f1;
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #00695c;
+  }
+  
+  .result {
+    font-size: 1.3rem;
+    margin-top: 20px;
+    color: #004d40;
+    text-align: center;
+  }
+  
+  .replay-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #26a69a;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .replay-btn:hover {
+    background-color: #00796b;
+  }
+
+  #start-music {
+    background-color: #26a69a; /* Couleur d'arrière-plan attrayante */
+    color: white; /* Texte blanc */
+    font-size: 1.2rem; /* Taille de la police */
+    padding: 12px 24px; /* Espacement intérieur */
+    border: none; /* Enlever les bordures */
+    border-radius: 30px; /* Coins arrondis */
+    cursor: pointer; /* Cursur en forme de main au survol */
+    transition: background-color 0.3s, transform 0.2s ease-in-out; /* Animation au survol */
+    margin-top: 20px; /* Espace au-dessus */
+  }
+  
+  #start-music:hover {
+    background-color: #00796b; /* Couleur au survol */
+    transform: scale(1.1); /* Légère augmentation de la taille du bouton */
+  }
+  
+  #start-music:active {
+    background-color: #004d40; /* Couleur lorsque le bouton est pressé */
+    transform: scale(1); /* Annule l'effet de zoom */
+  }
+
+  #toggle-music {
+    background-color: #f44336; /* Couleur rouge pour attirer l'attention */
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+    margin-top: 10px;
+  }
+  
+  #toggle-music:hover {
+    background-color: #d32f2f;
+    transform: scale(1.1);
+  }
+  
+  #toggle-music:active {
+    background-color: #b71c1c;
+    transform: scale(1);
+  }

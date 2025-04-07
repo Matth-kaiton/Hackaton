@@ -1,124 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plastic Invaders - Version de Base</title>
-  <style>
-    body {
-      margin: 0;
-      background: #a2ded0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    canvas {
-      background: #0b2b32;
-      box-shadow: 0 0 10px #00ffcc;
-      border-radius: 10px;
-    }
-  </style>
+  <title>Hackaton team les yoloist info</title>
+  <link rel="stylesheet" href="/template/css/menu.css">
 </head>
 <body>
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
-  <script>
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
-
-    const imgChips = new Image();
-    imgChips.src = "chips.png";
-    const imgSac = new Image();
-    imgSac.src = "plastique.png";
-    const imgBouteille = new Image();
-    imgBouteille.src = "bouteil.png";
-
-    function getImageByType(type) {
-      switch (type) {
-        case "chips": return imgChips;
-        case "sac": return imgSac;
-        case "bouteille": return imgBouteille;
-        default: return imgChips;
-      }
-    }
-
-    let bullets = [];
-    let enemies = [];
-    let mouseX = 400, mouseY = 300;
-    let lastEnemySpawn = 0;
-
-    canvas.addEventListener("mousemove", e => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-    });
-
-    canvas.addEventListener("click", () => {
-      bullets.push({ x: 400, y: 550, dx: (mouseX - 400) / 20, dy: (mouseY - 550) / 20 });
-    });
-
-    function spawnEnemy() {
-      const types = ["chips", "sac", "bouteille"];
-      const type = types[Math.floor(Math.random() * types.length)];
-      enemies.push({ x: Math.random() * 740, y: -60, speed: 1 + Math.random(), type, width: 50, height: 50 });
-    }
-
-    function drawEnemy(e) {
-      const image = getImageByType(e.type);
-      ctx.drawImage(image, e.x, e.y, e.width, e.height);
-    }
-
-    function drawBullet(bullet) {
-      ctx.fillStyle = "#00ffcc";
-      ctx.beginPath();
-      ctx.arc(bullet.x, bullet.y, 5, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    function updateGame() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "#00ffcc";
-      ctx.fillRect(380, 540, 40, 60);
-
-      ctx.strokeStyle = "#00ffcc";
-      ctx.beginPath();
-      ctx.moveTo(400, 550);
-      ctx.lineTo(mouseX, mouseY);
-      ctx.stroke();
-
-      bullets.forEach((b, i) => {
-        b.x += b.dx;
-        b.y += b.dy;
-        drawBullet(b);
-        if (b.y < 0 || b.x < 0 || b.x > 800) bullets.splice(i, 1);
-      });
-
-      if (Date.now() - lastEnemySpawn > 1000) {
-        spawnEnemy();
-        lastEnemySpawn = Date.now();
-      }
-
-      enemies.forEach((e, i) => {
-        e.y += e.speed;
-        drawEnemy(e);
-
-        bullets.forEach((b, j) => {
-          if (
-            b.x >= e.x && b.x <= e.x + e.width &&
-            b.y >= e.y && b.y <= e.y + e.height
-          ) {
-            enemies.splice(i, 1);
-            bullets.splice(j, 1);
-          }
-        });
-      });
-
-      requestAnimationFrame(updateGame);
-    }
-
-    updateGame();
-  </script>
+    <div id="container">
+      <div>
+        <button><a href="/template/html/plastique-shooter.html">Plastic shooter</a></button>
+        <p>Dans "Plastic Shooter", tu dois viser et éliminer des objets en plastique qui tombent du ciel. Le but est de réduire la quantité de déchets plastiques en éliminant le plus grand nombre possible d'objets avant la fin du temps imparti.</p>
+      </div>    
+        
+      <div>  
+        <button><a href="template/html/quizCity.html">Quiz City</a></button>
+        <p>Dans "Quiz City", teste tes connaissances sur les villes et leurs particularités. Réponds à des questions pour améliorer ton score et découvrir des faits intéressants sur des endroits du monde entier !</p>
+      </div>
+    </div>
 </body>
 </html>
