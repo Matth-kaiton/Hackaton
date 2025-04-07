@@ -1,6 +1,10 @@
 body {
     font-family: 'Segoe UI', sans-serif;
+<<<<<<< HEAD:styles.css
     background: url('image/image.png') no-repeat center center fixed;
+=======
+    background: url('/template/image/image.png') no-repeat center center fixed;
+>>>>>>> 6e4c3322af2cad0b3e67c2db85fc8ea41d3382d0:template/css/styles.css
     background-size: cover;
     margin: 0;
     padding: 20px;
