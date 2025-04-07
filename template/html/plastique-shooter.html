@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plastic Invaders - Version de Base</title>
+  <title>Plastic-shooter - Version de Base</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
@@ -11,18 +14,36 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column; 
       height: 100vh;
+      text-align: center;  
     }
 
     canvas {
       background: url("/template/image/8bit_beach_loop.gif") no-repeat center center;
       background-size: cover;
-      box-shadow: 0 0 10px #00ffcc;
+      box-shadow: 0 0 10px tortue;
       border-radius: 10px;
+    }
+
+    body {
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    canvas {
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    h1 {
+      font-size: 40px; 
+      margin-bottom: 20px; 
+      color: #ffffff;  
     }
   </style>
 </head>
 <body>
+  <h1>Plastic-shooter</h1>
+  
   <canvas id="gameCanvas" width="800" height="600"></canvas>
 
   <script>
@@ -39,6 +60,8 @@
     imgGant.src = "/template/image/gant.png";
     const imgGoblet = new Image();
     imgGoblet.src = "/template/image/goblet.png";
+    const imgTortue = new Image();
+    imgTortue.src = "/template/image/tortue.png"; 
 
     function getImageByType(type) {
       switch (type) {
@@ -87,16 +110,15 @@
 
     function drawScore() {
       ctx.fillStyle = "#ffffff";
-      ctx.font = "24px 'Segoe UI'";
+      ctx.font = "24px 'Press Start 2P'"; // Appliquer la police ici
       ctx.fillText("Score : " + score, 20, 40);
     }
 
     function updateGame() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Vaisseau
-      ctx.fillStyle = "#00ffcc";
-      ctx.fillRect(380, 540, 40, 60);
+      
+      // Dessine l'image de la tortue
+      ctx.drawImage(imgTortue, 380, 540, 40, 60);  // Remplace le rectangle par l'image
 
       // Ligne de visée
       ctx.strokeStyle = "#00ffcc";
@@ -113,7 +135,6 @@
         if (b.y < 0 || b.x < 0 || b.x > 800) bullets.splice(i, 1);
       });
 
-      // Ennemis
       if (Date.now() - lastEnemySpawn > 1000) {
         spawnEnemy();
         lastEnemySpawn = Date.now();
@@ -123,7 +144,6 @@
         e.y += e.speed;
         drawEnemy(e);
 
-        // Collision balle / ennemi
         bullets.forEach((b, j) => {
           if (
             b.x >= e.x && b.x <= e.x + e.width &&
@@ -131,14 +151,13 @@
           ) {
             enemies.splice(i, 1);
             bullets.splice(j, 1);
-            score += 10; // +10 points si ennemi détruit
+            score += 10;
           }
         });
 
-        // Ennemi atteint le bas du canvas
         if (e.y > canvas.height) {
           enemies.splice(i, 1);
-          score -= 5; // -5 points si raté
+          score -= 5; 
         }
       });
 
