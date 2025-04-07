@@ -33,12 +33,18 @@
     imgSac.src = "plastique.png";
     const imgBouteille = new Image();
     imgBouteille.src = "bouteil.png";
+    const imgGant = new Image();
+    imgGant.src = "gant.png";
+    const imgGoblet = new Image();
+    imgGoblet.src = "goblet.png";
 
     function getImageByType(type) {
       switch (type) {
         case "chips": return imgChips;
         case "sac": return imgSac;
         case "bouteille": return imgBouteille;
+        case "gant": return imgGant;
+        case "goblet": return imgGoblet;
         default: return imgChips;
       }
     }
@@ -59,7 +65,7 @@
     });
 
     function spawnEnemy() {
-      const types = ["chips", "sac", "bouteille"];
+      const types = ["chips", "sac", "bouteille", "gant", "goblet"];
       const type = types[Math.floor(Math.random() * types.length)];
       enemies.push({ x: Math.random() * 740, y: -60, speed: 1 + Math.random(), type, width: 50, height: 50 });
     }
