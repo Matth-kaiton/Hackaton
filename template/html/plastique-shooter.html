@@ -12,6 +12,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      flex-direction: column;
     }
 
     canvas {
@@ -20,10 +21,48 @@
       box-shadow: 0 0 10px #00ffcc;
       border-radius: 10px;
     }
+
+    .buttons-container {
+      position: fixed;
+      bottom: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    a{
+    text-decoration: none;
+    color: white;
+  }
+
+  button:hover {
+    background-color: #388E3C; /* vert plus foncé au survol */
+    transform: scale(1.05);
+  }
+
+  button {
+    padding: 15px 30px;
+    font-size: 16px;
+    background-color: #4CAF50; /* vert naturel */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: solid 1px #276829; /* bordure verte */
+  }
+
   </style>
 </head>
 <body>
   <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+  <div class="buttons-container">
+    <button class="btn" id="replayBtn"><a>Rejouer</a></button>
+    <button class="btn" id="menuBtn"><a href="/index.html">Menu</a></button>
+  </div>
 
   <script>
     const canvas = document.getElementById("gameCanvas");
@@ -55,7 +94,19 @@
     let enemies = [];
     let mouseX = 400, mouseY = 300;
     let lastEnemySpawn = 0;
-    let score = 0;
+    let Score = 0;
+
+    let timeLeft = 30; // secondes
+    let gameRunning = true;
+
+    const timerInterval = setInterval(() => {
+    if (timeLeft > 0) {
+      timeLeft--;
+    } else {
+      gameRunning = false;
+      clearInterval(timerInterval);
+    }
+  }, 1000);
 
     canvas.addEventListener("mousemove", e => {
       const rect = canvas.getBoundingClientRect();
@@ -79,7 +130,7 @@
     }
 
     function drawBullet(bullet) {
-      ctx.fillStyle = "#00ffcc";
+      ctx.fillStyle = "red";
       ctx.beginPath();
       ctx.arc(bullet.x, bullet.y, 5, 0, Math.PI * 2);
       ctx.fill();
@@ -88,15 +139,22 @@
     function drawScore() {
       ctx.fillStyle = "#ffffff";
       ctx.font = "24px 'Segoe UI'";
-      ctx.fillText("Score : " + score, 20, 40);
+      ctx.fillText("Score : " + Score, 20, 40);
     }
+
+    function drawTimer() {
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "24px 'Segoe UI'";
+    ctx.fillText("Temps : " + timeLeft + "s", 660, 40);
+  }
 
     function updateGame() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Vaisseau
-      ctx.fillStyle = "#00ffcc";
-      ctx.fillRect(380, 540, 40, 60);
+      const imageTortue = new Image();
+      imageTortue.src = "/template/image/tortue.png";
+      ctx.drawImage(imageTortue, 380, 540, 40, 60);
 
       // Ligne de visée
       ctx.strokeStyle = "#00ffcc";
@@ -131,22 +189,77 @@
           ) {
             enemies.splice(i, 1);
             bullets.splice(j, 1);
-            score += 10; // +10 points si ennemi détruit
+            Score += 10; // +10 points si ennemi détruit
           }
         });
 
         // Ennemi atteint le bas du canvas
         if (e.y > canvas.height) {
           enemies.splice(i, 1);
-          score -= 5; // -5 points si raté
         }
       });
 
       drawScore();
-      requestAnimationFrame(updateGame);
+      drawTimer();
+      if (gameRunning) {
+        requestAnimationFrame(updateGame);
+      } else {
+        ctx.fillStyle = "black";
+        ctx.font = "36px 'Segoe UI'";
+
+        // Calculer les dimensions du texte pour ajuster le cadre
+        const text1 = "Tu as réduit " + Score + " t de déchet plastique Bravo !!";
+        const text2 = "C'est l'équivalent des déchets produits par ";
+        const text3 = (Score / 0.04) + " personne en 1 an";
+
+        const padding = 20; // espacement autour du texte
+        const maxWidth = 600; // largeur maximale du texte pour déterminer la taille du cadre
+
+        // Mesurer la largeur du texte
+        const textWidth1 = ctx.measureText(text1).width;
+        const textWidth2 = ctx.measureText(text2).width;
+        const textWidth3 = ctx.measureText(text3).width;
+
+        // Largeur du cadre (prend le plus large des 3 textes + padding)
+        const width = Math.max(textWidth1, textWidth2, textWidth3) + padding * 2;
+
+        // Hauteur du cadre (ajoute des espacements verticaux entre les lignes de texte)
+        const height = 3 * 36 + padding * 2; // 36px étant la taille du texte, multiplier par 3 pour 3 lignes
+
+        // Dessiner le fond coloré
+        ctx.fillStyle = "#ADD8E6"; // couleur de fond (exemple : bleu clair)
+        ctx.fillRect(0 - padding, 280 - padding, width + 150, height + 15); // position et taille du fond coloré
+        // Dessiner le cadre
+        ctx.strokeStyle = "black"; // couleur du cadre
+        ctx.lineWidth = 4; // largeur des bords du cadre
+        ctx.strokeRect(0 - padding, 280 - padding, width + 150, height + 15); // position et taille du cadre
+
+        // Affichage du texte
+        ctx.fillStyle = "black";
+        ctx.fillText(text1, 65, 300);
+        ctx.fillText(text2, 80, 350);
+        ctx.fillText(text3, 220, 400);
+      }
     }
 
     updateGame();
+
+    // Fonction pour redémarrer le jeu
+    document.getElementById("replayBtn").addEventListener("click", () => {
+      Score = 0;
+      timeLeft = 30;
+      gameRunning = true;
+      enemies = [];
+      bullets = [];
+      updateGame();
+    });
+
+    // Fonction pour retourner au menu
+    document.getElementById("menuBtn").addEventListener("click", () => {
+      // Code pour retourner au menu (à adapter en fonction de la structure de ton application)
+      alert("Retour au menu");
+      // Tu peux rediriger l'utilisateur vers une autre page ici si nécessaire.
+    });
   </script>
 </body>
 </html>

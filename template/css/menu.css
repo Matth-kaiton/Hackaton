@@ -34,6 +34,30 @@ body {
     transition: all 0.3s ease;
     border: solid 1px #276829; /* bordure verte */
   }
+
+  #container{
+    display: flex; /* Utilise Flexbox pour aligner les éléments côte à côte */
+    flex-direction: row;
+    justify-content: space-between; /* Espacement égal entre les éléments */
+    gap: 20px; /* Espace entre les éléments */
+  }
+
+  #container > div {
+    flex: 1; /* Chaque élément prend une part égale de l'espace disponible */
+    display: flex;
+    justify-content: center; /* Centre le contenu à l'intérieur de chaque élément */
+  }
+
+  p{
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin: 0; /* Supprime la marge par défaut */
+    padding: 0; /* Supprime le remplissage par défaut */
+    background-color: rgba(76, 175, 80, 0.8);
+    border-radius: 12px; /* Coins arrondis pour le fond */
+    border: solid 1px #276829; 
+  }
   
   button:hover {
     background-color: #388E3C; /* vert plus foncé au survol */
