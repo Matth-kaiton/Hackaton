@@ -18,8 +18,27 @@
     <div id="stats" class="stats"></div>
   </div>
 
-  <button id="start-music">Démarrer la musique</button>
+  <img id="negative-env" src="/template/image/planete.png" alt="Alerte écologie" style="display: none; position: fixed; bottom: 10px; right: 10px; width: 300px; height: auto;" />
+  <img id="negative-happy" src="/template/image/fourche.png" alt="Alerte bonheur" style="display: none; position: fixed; bottom: 10px; left: 10px; width: 300px; height: auto;" />
+  <img id="negative-money" src="/template/image/argent.png" alt="Alerte budget" style="display: none; position: fixed; top: 10px; right: 10px; width: 300px; height: auto;" />
+    
+    <button id="start-music">Démarrer la musique</button>
 
+    <!-- Conteneur des barres de progression verticales -->
+    <div class="progress-bars">
+        <div class="progress-bar">
+        <div id="env-bar-inner" class="progress-bar-inner progress-bar-env"></div>
+        </div>
+        <div class="progress-bar">
+        <div id="happy-bar-inner" class="progress-bar-inner progress-bar-happy"></div>
+        </div>
+        <div class="progress-bar">
+        <div id="money-bar-inner" class="progress-bar-inner progress-bar-money"></div>
+        </div>
+    </div>
+  
+    
   <script src="/template/js/script.js"></script>
+
 </body>
 </html>
