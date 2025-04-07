@@ -1,10 +1,6 @@
 body {
     font-family: 'Segoe UI', sans-serif;
-<<<<<<< HEAD:styles.css
-    background: url('image/image.png') no-repeat center center fixed;
-=======
-    background: url('/template/image/image.png') no-repeat center center fixed;
->>>>>>> 6e4c3322af2cad0b3e67c2db85fc8ea41d3382d0:template/css/styles.css
+    background: url('/image/image.png') no-repeat center center fixed;
     background-size: cover;
     margin: 0;
     padding: 20px;
@@ -168,6 +164,9 @@ body {
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   /* Jauge remplie (la couleur change en fonction de l'impact) */
@@ -192,5 +191,29 @@ body {
   .progress-bar-money {
     background-color: red;
   }
-  
-  
+
+  /* Style for progress bar labels */
+  .progress-label {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  /* Style for progress bar labels */
+.progress-bar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.progress-label {
+    margin-bottom: 5px; /* Space between the label and the bar */
+    font-size: 0.9rem;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+

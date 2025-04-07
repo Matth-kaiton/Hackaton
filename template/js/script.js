@@ -128,6 +128,14 @@ const initialState = {
   
   let current = 0;
   
+  // Function to shuffle an array
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+  
   function showQuestion() {
     if (current >= questions.length) {
       endGame();
@@ -135,6 +143,10 @@ const initialState = {
     }
   
     const q = questions[current];
+    
+    // Shuffle the options array
+    shuffleArray(q.options);
+  
     let html = `<div class="question">${q.question}</div><div class="options">`;
   
     q.options.forEach((opt, i) => {
@@ -143,7 +155,7 @@ const initialState = {
   
     html += `</div>`;
     
-    // Ajout du Fun Fact pour chaque question (ici uniquement dans la fonction showQuestion)
+    // Add the Fun Fact for each question
     html += `<div class="fun-fact">${q.funFact}</div>`;
     
     document.getElementById("game").innerHTML = html;
@@ -230,6 +242,7 @@ const initialState = {
         ${conclusion}
         <br><br>
         <button class="replay-btn" onclick="restart()">Réessayer</button>
+        <button class="replay-btn" id="menuBtn"><a href="/index.html">Menu</a></button>
       </div>`;
   }
   
@@ -274,4 +287,3 @@ const initialState = {
   });
   
   showQuestion();
-  
