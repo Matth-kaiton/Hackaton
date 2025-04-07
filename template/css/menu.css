@@ -1,0 +1,46 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: url('/template/image/planet.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  /* Conteneur des boutons centré */
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  /* Style écologique pour les boutons */
+  button {
+    padding: 15px 30px;
+    font-size: 16px;
+    background-color: #4CAF50; /* vert naturel */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: solid 1px #276829; /* bordure verte */
+  }
+  
+  button:hover {
+    background-color: #388E3C; /* vert plus foncé au survol */
+    transform: scale(1.05);
+  }
+
+  a{
+    text-decoration: none;
+    color: white;
+  }
