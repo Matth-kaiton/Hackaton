@@ -230,6 +230,7 @@ const initialState = {
         ${conclusion}
         <br><br>
         <button class="replay-btn" onclick="restart()">Réessayer</button>
+        <button class="replay-btn" id="menuBtn"><a href="/index.html">Menu</a></button>
       </div>`;
   }
   
