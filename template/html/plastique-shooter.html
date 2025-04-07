@@ -79,18 +79,22 @@
     let mouseX = 400, mouseY = 300;
     let lastEnemySpawn = 0;
     let score = 0;
+    let gameOver = false;
 
     canvas.addEventListener("mousemove", e => {
+      if (gameOver) return;
       const rect = canvas.getBoundingClientRect();
       mouseX = e.clientX - rect.left;
       mouseY = e.clientY - rect.top;
     });
 
     canvas.addEventListener("click", () => {
+      if (gameOver) return;
       bullets.push({ x: 400, y: 550, dx: (mouseX - 400) / 20, dy: (mouseY - 550) / 20 });
     });
 
     function spawnEnemy() {
+      if (gameOver) return;
       const types = ["chips", "sac", "bouteille", "gant", "goblet"];
       const type = types[Math.floor(Math.random() * types.length)];
       enemies.push({ x: Math.random() * 740, y: -60, speed: 1 + Math.random(), type, width: 50, height: 50 });
@@ -114,7 +118,15 @@
       ctx.fillText("Score : " + score, 20, 40);
     }
 
+    function drawGameOver() {
+      ctx.fillStyle = "#ff0000";
+      ctx.font = "48px 'Press Start 2P'";
+      ctx.fillText("GAME OVER", canvas.width / 2 - 150, canvas.height / 2);
+    }
+
     function updateGame() {
+      if (gameOver) return;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Dessine l'image de la tortue
@@ -158,11 +170,19 @@
         if (e.y > canvas.height) {
           enemies.splice(i, 1);
           score -= 5; 
+          if (score <= -10) {
+            gameOver = true;
+          }
         }
       });
 
       drawScore();
-      requestAnimationFrame(updateGame);
+
+      if (gameOver) {
+        drawGameOver();
+      } else {
+        requestAnimationFrame(updateGame);
+      }
     }
 
     updateGame();
